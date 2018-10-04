@@ -33,14 +33,14 @@ int main()
 {
 	int* vector = (int*)malloc(sizeof(int)); // start vect.;
 	int* result; // result vector;
-	int i = 0;
+	int i = 1;
 	char s[N];
 	int n = 1; // rec. step;
   
 	// Entering the data;
 	printf("Please, enter start vector coordinates: ");
 	scanf("%s", s);
-    	if(atoi(s)) vector[i] = atoi(s);
+    	if(atoi(s)) vector[i-1] = atoi(s);
     	else{
         	printf("\x1b[31mWrong coordinate (%s)!\n\x1b[0m", s);
 		free(vector);
@@ -52,14 +52,13 @@ int main()
 		vector = realloc(vector, i*sizeof(int));
 		s[0] = '\0';
 		scanf("%s", s);
-		if(atoi(s)) vector[i] = atoi(s);
+		if(atoi(s)) vector[i-1] = atoi(s);
         	else{
             		printf("\x1b[31mWrong coordinate (%s)!\n\x1b[0m", s);
 			free(vector);
 		    	return 0;
         	}
 	}
-    	i++;
 
  	// Proccessing program;
 	result = (int*)malloc(i*sizeof(int));
