@@ -4,9 +4,10 @@
 #define N 100
 
 // recursive function;
-void function(int* vector, int* result, int count)
+void function(int* vector, int* result, int count, int n)
 {
-	for(int i=0; i<count; i++) printf("\t");
+	for(int i = 0; i < n; i++) printf("\t");
+	printf("%d step of the recursion: ", n);
 	if(count == 1){
 		result[0] = vector[0];
 	    	printf("%d\n", result[0]);
@@ -22,41 +23,49 @@ void function(int* vector, int* result, int count)
 		}
 	    	printf("%d %d\n", result[0], result[1]);
 	    	// recursion;
-	    	if(count > 2) function(vector+2, result+2, count-2);
+	    	if(count > 2) function(vector+2, result+2, count-2, n+1);
 	}
+	for(int i = 0; i < n; i++) printf("\t");
+	printf("end of %d rec. step.\n", n);
 }
 
 int main()
 {
-	int* vector = (int*)malloc(sizeof(int));
-	int* result;
+	int* vector = (int*)malloc(sizeof(int)); // start vect.;
+	int* result; // result vector;
 	int i = 0;
 	char s[N];
+	int n = 1; // rec. step;
   
 	// Entering the data;
 	printf("Please, enter start vector coordinates: ");
 	scanf("%s", s);
     	if(atoi(s)) vector[i] = atoi(s);
     	else{
-        	printf("Wrong coordinate (%s)!", s);
+        	printf("\x1b[31mWrong coordinate (%s)!\n\x1b[0m", s);
+		free(vector);
 		return 0;
     	}
 	while(getchar() != '\n')
 	{
 		i++;
-		realloc(vector, i*sizeof(int));
+		vector = realloc(vector, i*sizeof(int));
+		s[0] = '\0';
 		scanf("%s", s);
 		if(atoi(s)) vector[i] = atoi(s);
         	else{
-            		printf("Wrong coordinate (%s)!", s);
+            		printf("\x1b[31mWrong coordinate (%s)!\n\x1b[0m", s);
+			free(vector);
 		    	return 0;
         	}
 	}
     	i++;
 
-	// Proccessing program;
+ 	// Proccessing program;
 	result = (int*)malloc(i*sizeof(int));
-	function(vector, result, i);
+	printf("\n");
+	function(vector, result, i, n);
+	printf("\n");
     
 	// Print result and free memory;
 	printf("Result vector: ");
