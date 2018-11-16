@@ -64,7 +64,7 @@ int main() {
             		continue;
         	}
         	if((str[i] == 'm') || (str[i] == 'M')){ // calling a min or max function;
-			if(stack_size != 1){ // looking for an available error (the count of args);
+			if(stack_size < 1){ // looking for an available error (the count of args);
 				fprintf(stderr, "\x1b[31mERROR: There are 2 args should be in a function!\x1b[0m\n");
         			free(stack);
         			return 0;
@@ -90,6 +90,12 @@ int main() {
         	free(stack);
         	return 0;
     	}
+
+	if(stack_size != 0){ // looking for an available error (the count of args);
+		fprintf(stderr, "\x1b[31mERROR: There are 2 args should be in a function!\x1b[0m\n");
+        	free(stack);
+        	return 0;
+	}
     
     	// print a result;
     	printf("\n\x1b[32mResult: %d\x1b[0m\n", pop(stack, stack_size--));
