@@ -1,0 +1,1 @@
+g++ Source/main.cpp -o main
